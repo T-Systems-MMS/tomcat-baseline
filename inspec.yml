@@ -1,0 +1,8 @@
+name: tomcat-baseline
+title: Apache Tomcat InSpec Profile
+maintainer: Sebastian Gumprich
+copyright: T-Systems Multimedia Solutions GmbH
+copyright_email: Sebastian.Gumprich@t-systems.com
+license: Apache-2.0
+summary: An InSpec Compliance Profile to test Apache Tomcat
+version: 0.1.0

@@ -78,7 +78,7 @@ end
 
 # control 'tomcat.manager_app' do
 #   tag 'ID: 3.39-6/2.2'
-#   title 'If the “manager” application is used, this must be protected against unauthorized use.'
+#   title 'If the "manager" application is used, this must be protected against unauthorized use.'
 # end
 
 control 'tomcat.ip_whitelisting' do
@@ -117,24 +117,45 @@ end
 control 'tomcat.directories' do
   title 'Check for existence and correct permissions of tomcat directories'
   describe directory('/usr/share/tomcat') do
-    it { should exist }
     it { should be_directory }
     its('owner') { should eq 'tomcat' }
     its('group') { should eq 'tomcat' }
-    its('mode') { should cmp'0750' }
-    it { should be_writable.by_user('tomcat') }
-    it { should be_readable.by_user('tomcat') }
-    it { should be_executable.by_user('tomcat') }
+    its('mode') { should cmp '0750' }
   end
+  describe directory('/etc/tomcat') do
+    it { should be_directory }
+    its('owner') { should eq 'tomcat' }
+    its('group') { should eq 'tomcat' }
+    its('mode') { should cmp '0750' }
+  end
+  describe directory('/var/log/tomcat') do
+    it { should be_directory }
+    its('owner') { should eq 'tomcat' }
+    its('group') { should eq 'tomcat' }
+    its('mode') { should cmp '0750' }
+  end
+  describe directory('/var/lib/tomcat') do
+    it { should be_directory }
+    its('owner') { should eq 'tomcat' }
+    its('group') { should eq 'tomcat' }
+    its('mode') { should cmp '0750' }
+  end
+  describe directory('/var/cache/tomcat') do
+    it { should be_directory }
+    its('owner') { should eq 'tomcat' }
+    its('group') { should eq 'tomcat' }
+    its('mode') { should cmp '0750' }
+  end
+end
+
+control 'tomcat.files' do
+  title 'Check for existence and correct permissions of tomcat files'
   describe file('/usr/share/tomcat/conf/web.xml') do
     it { should exist }
     it { should be_file }
     its('owner') { should eq 'tomcat' }
     its('group') { should eq 'tomcat' }
     its('mode') { should cmp '0640' }
-    it { should be_writable.by_user('tomcat') }
-    it { should be_readable.by_user('tomcat') }
-    it { should_not be_executable.by_user('tomcat') }
   end
   describe file('/usr/share/tomcat/conf/context.xml') do
     it { should exist }
@@ -142,9 +163,6 @@ control 'tomcat.directories' do
     its('owner') { should eq 'tomcat' }
     its('group') { should eq 'tomcat' }
     its('mode') { should cmp '0640' }
-    it { should be_writable.by_user('tomcat') }
-    it { should be_readable.by_user('tomcat') }
-    it { should_not be_executable.by_user('tomcat') }
   end
   describe file('/usr/share/tomcat/conf/server.xml') do
     it { should exist }
@@ -152,48 +170,5 @@ control 'tomcat.directories' do
     its('owner') { should eq 'tomcat' }
     its('group') { should eq 'tomcat' }
     its('mode') { should cmp '0640' }
-    it { should be_writable.by_user('tomcat') }
-    it { should be_readable.by_user('tomcat') }
-    it { should_not be_executable.by_user('tomcat') }
-  end
-  describe directory('/etc/tomcat') do
-    it { should exist }
-    it { should be_directory }
-    its('owner') { should eq 'tomcat' }
-    its('group') { should eq 'tomcat' }
-    its('mode') { should cmp '0750' }
-    it { should be_writable.by_user('tomcat') }
-    it { should be_readable.by_user('tomcat') }
-    it { should be_executable.by_user('tomcat') }
-  end
-  describe directory('/var/log/tomcat') do
-    it { should exist }
-    it { should be_directory }
-    its('owner') { should eq 'tomcat' }
-    its('group') { should eq 'tomcat' }
-    its('mode') { should cmp '0750' }
-    it { should be_writable.by_user('tomcat') }
-    it { should be_readable.by_user('tomcat') }
-    it { should be_executable.by_user('tomcat') }
-  end
-  describe directory('/var/lib/tomcat') do
-    it { should exist }
-    it { should be_directory }
-    its('owner') { should eq 'tomcat' }
-    its('group') { should eq 'tomcat' }
-    its('mode') { should cmp '0750' }
-    it { should be_writable.by_user('tomcat') }
-    it { should be_readable.by_user('tomcat') }
-    it { should be_executable.by_user('tomcat') }
-  end
-  describe directory('/var/cache/tomcat') do
-    it { should exist }
-    it { should be_directory }
-    its('owner') { should eq 'tomcat' }
-    its('group') { should eq 'tomcat' }
-    its('mode') { should cmp '0750' }
-    it { should be_writable.by_user('tomcat') }
-    it { should be_readable.by_user('tomcat') }
-    it { should be_executable.by_user('tomcat') }
   end
 end

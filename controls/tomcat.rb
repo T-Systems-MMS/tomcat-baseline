@@ -76,10 +76,25 @@ control 'tomcat.sample_apps' do
   end
 end
 
-# control 'tomcat.manager_app' do
-#   tag 'ID: 3.39-6/2.2'
-#   title 'If the "manager" application is used, this must be protected against unauthorized use.'
-# end
+control 'tomcat.manager_app' do
+  tag 'ID: 3.39-6/2.2'
+  title 'If the "manager" application is used, this must be protected against unauthorized use.'
+  manager_used = inspec.command('ls /usr/share/tomcat/server/webapps/manager')
+  if manager_used
+    describe file('/etc/tomcat/server.xml') do
+      its('owner') { should eq 'tomcat' }
+      its('group') { should eq 'tomcat' }
+      its('mode') { should cmp '0640' }
+      its('content') { should match 'org.apache.catalina.users.MemoryUserDatabaseFactory' }
+    end
+    describe file('/etc/tomcat/tomcat-users.xml') do
+      its('owner') { should eq 'tomcat' }
+      its('group') { should eq 'tomcat' }
+      its('mode') { should cmp '0640' }
+      its('content') { should match '<user username=".*"\s+password="([a-f0-9]{40})"\s+roles=".*manager-gui.*"/>' }
+    end
+  end
+end
 
 control 'tomcat.ip_whitelisting' do
   tag 'ID: 3.39-7/2.2'

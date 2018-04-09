@@ -1,4 +1,6 @@
 # tomcat-baseline
+[![Build Status](http://img.shields.io/travis/T-Systems-MMS/tomcat-baseline.svg)][1]
+
 
 This Inspec Profile tries to ensure compliance of an Apache Tomcat installation along the [Deutsche Telekom, Group IT Security, Security Requirements]().
 
@@ -33,3 +35,5 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+[1]: http://travis-ci.org/T-Systems-MMS/tomcat-baseline

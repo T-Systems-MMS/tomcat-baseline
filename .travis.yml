@@ -4,6 +4,9 @@ cache: bundler
 rvm:
   - 2.4.1
 
+env:
+  CHEF_LICENSE=accept-silent
+
 bundler_args: --without integration
 script: bundle exec rake
 

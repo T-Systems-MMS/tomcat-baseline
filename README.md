@@ -2,7 +2,7 @@
 [![Build Status](http://img.shields.io/travis/T-Systems-MMS/tomcat-baseline.svg)][1]
 
 
-This Inspec Profile tries to ensure compliance of an Apache Tomcat installation along the [Deutsche Telekom, Group IT Security, Security Requirements]().
+This Inspec Profile tries to ensure compliance of an Apache Tomcat installation along the [Deutsche Telekom, Group IT Security, Security Requirements](https://www.telekom.com/psa) - 3_39_Tomcat_Application_Server.
 
 ## Standalone Usage
 
@@ -21,7 +21,7 @@ $ inspec exec https://github.com/T-Systems-MMS/tomcat-baseline
 
 ## License and Author
 
-* Author::  Sebastian Gumprich <sebastian.gumprich@t-systems.com>
+* Author:  Sebastian Gumprich <sebastian.gumprich@t-systems.com>
 
 
 Licensed under the Apache License, Version 2.0 (the "License");

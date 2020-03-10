@@ -19,6 +19,12 @@ You can also execute the profile directly from Github:
 $ inspec exec https://github.com/T-Systems-MMS/tomcat-baseline
 ```
 
+It also can be executed inside Docker image with overridden default values. Here is an example for default Tomcat 9 ([`9-jdk11-openjdk-slim`](https://hub.docker.com/_/tomcat)) settings:
+
+```bash
+inspec exec tomcat-baseline/ --input catalina_home=/usr/local/tomcat tomcat_conf=/usr/local/tomcat/conf tomcat_libs=/usr/local/tomcat/lib tomcat_logs=/usr/local/tomcat/logs tomcat_cache=/usr/local/tomcat/temp logging_filehandler=AsyncFileHandler tomcat_service=disable
+```
+
 ## License and Author
 
 * Author:  Sebastian Gumprich <sebastian.gumprich@t-systems.com>

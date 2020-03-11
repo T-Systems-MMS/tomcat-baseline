@@ -24,9 +24,9 @@ control 'tomcat.dedicated_service' do
   impact 1.0
   tag 'ID: 3.10-5/2.1-1'
   title 'If not containerized, the application service must be installed properly.'
-    describe service('tomcat') do
+  describe service('tomcat') do
     before do
-      skip if input('tomcat_service') == "disable"
+      skip if input('tomcat_service') == 'disable'
     end
     it { should be_installed }
     it { should be_enabled }
@@ -34,7 +34,7 @@ control 'tomcat.dedicated_service' do
   end
   describe processes('tomcat') do
     before do
-      skip if input('tomcat_service') == "disable"
+      skip if input('tomcat_service') == 'disable'
     end
     its('users') { should eq [input('tomcat_user')] }
   end
@@ -50,7 +50,7 @@ control 'tomcat.shutdownport' do
   impact 1.0
   tag 'ID: 3.39-2/2.2'
   title 'If the shutdown port is not needed, it must be deactivated.'
-  describe file(input('tomcat_conf') + "/server.xml") do
+  describe file(input('tomcat_conf') + '/server.xml') do
     its('content') { should match '<Server port="-1"' }
   end
 end
@@ -108,7 +108,6 @@ control 'tomcat.manager_app' do
   impact 1.0
   tag 'ID: 3.39-6/2.2'
   title 'If the "manager" application is used, this must be protected against unauthorized use.'
-  manager_used = inspec.command('ls ' + input('catalina_home') + '/webapps/manager')
   if File.directory?(input('catalina_home') + '/webapps/manager')
     describe file(input('tomcat_conf') + '/server.xml') do
       its('owner') { should eq input('tomcat_user') }
